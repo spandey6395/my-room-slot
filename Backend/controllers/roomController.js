@@ -16,7 +16,8 @@ export const searchRoom = async (req, res) => {
         { username: { $regex: search, $options: "i" } }, // Case-insensitive search
         // { mobile: { $regex: search, $options: "i" } }, // Case-insensitive search
         { roomId: { $regex: search, $options: "i" } }, // Case-insensitive search
-        { features: { $in: [search] } }, // Features as an array
+        // { features: { $in: [search] } }, // Features as an arra
+        { features: { $elemMatch: { $regex: new RegExp(search, "i") } } },
       ],
     };
 
